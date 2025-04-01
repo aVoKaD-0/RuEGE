@@ -1,0 +1,20 @@
+package com.example.mobile.data.local.relation;
+
+import androidx.room.Embedded;
+import androidx.room.Relation;
+
+import com.example.mobile.data.local.entity.TaskEntity;
+import com.example.mobile.data.local.entity.TaskOptionEntity;
+
+import java.util.List;
+
+public class TaskWithOptions {
+    @Embedded
+    public TaskEntity task;
+
+    @Relation(
+        parentColumn = "task_id",
+        entityColumn = "task_id"
+    )
+    public List<TaskOptionEntity> options;
+} 
