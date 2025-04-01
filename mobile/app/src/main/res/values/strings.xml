@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">РуЕГЭ</string>
+    <string name="welcome_title">Подготовка к ЕГЭ по русскому языку</string>
+    <string name="get_started">Начать</string>
+    <string name="theory">Теория</string>
+    <string name="exercises">Задания</string>
+    <string name="tests">Тесты</string>
+    <string name="favorites">Избранное</string>
+    <string name="profile">Профиль</string>
+    <string name="title_activity_detail">Детали</string>
+    <string name="error_loading_data">Ошибка загрузки.\nПроверьте интернет.</string>
+</resources>

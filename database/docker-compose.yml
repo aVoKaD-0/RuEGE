@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgres:15 # Рекомендуется использовать конкретную версию PostgreSQL
+    container_name: ruege_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ruege_user} # Имя пользователя БД (можно задать через .env или использовать значение по умолчанию)
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-StrongPassword123} # Пароль пользователя БД (ОБЯЗАТЕЛЬНО СМЕНИТЬ И ЗАДАТЬ ЧЕРЕЗ .env)
+      POSTGRES_DB: ${POSTGRES_DB:-ruege_db} # Имя базы данных (можно задать через .env или использовать значение по умолчанию)
+      PGDATA: /var/lib/postgresql/data/pgdata # Указываем поддиректорию для данных внутри volume
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Том для сохранения данных БД между перезапусками
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Монтируем скрипт инициализации
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432" # Проброс порта (можно задать через .env или использовать 5432 по умолчанию)
+    restart: unless-stopped
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+
+volumes:
+  postgres_data: # Определяем именованный том для данных
+    driver: local
