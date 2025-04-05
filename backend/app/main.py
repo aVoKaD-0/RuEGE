@@ -1,7 +1,7 @@
 from fastapi import FastAPI, UploadFile, Depends
 from sqlalchemy.orm import Session
-from database import SessionLocal
-from minio_client import upload_file
+from app.db.session import SessionLocal
+from app.minio.minio_client import upload_file
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.api import api_router
